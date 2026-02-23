@@ -554,6 +554,46 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
+    .nav-links.mobile-open {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 65px; left: 0; right: 0;
+      background: #fff;
+      border-top: 2px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      padding: 8px 0 16px;
+      gap: 0;
+      z-index: 1500;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .nav-links.mobile-open > li > a {
+      padding: 12px 20px;
+      font-size: 15px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #222 !important;
+      background: none !important;
+    }
+    .nav-links.mobile-open .dropdown {
+      position: static !important;
+      opacity: 1 !important; visibility: visible !important;
+      transform: none !important;
+      box-shadow: none; border: none; border-radius: 0;
+      padding: 0; min-width: unset;
+      background: #f9f5ee;
+      display: none;
+      pointer-events: all;
+    }
+    .nav-links.mobile-open > li:hover .dropdown,
+    .nav-links.mobile-open > li.open .dropdown { display: block; }
+    .nav-links.mobile-open .dropdown a {
+      padding: 10px 32px;
+      font-size: 14px;
+      border-bottom: 1px solid #ece8de;
+      color: #444;
+    }
+    .nav-links.mobile-open .dropdown-label { padding: 8px 32px 4px; }
     .mobile-menu-btn { display: block; }
     .features-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: 1fr; }
@@ -561,10 +601,15 @@
     .cart-sidebar { width: 100%; right: -100%; }
     .hero-stats { gap: 24px; }
     .admin-tabs { overflow-x: auto; }
+    .product-card { padding: 10px; }
+    .product-name { font-size: 13px; }
+    .product-price { font-size: 18px; }
+    .product-installment { font-size: 11px; }
+    .add-btn { padding: 10px; font-size: 13px; }
   }
   @media (max-width: 480px) {
     .categories-grid { grid-template-columns: repeat(2, 1fr); }
-    .products-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   }
 
   /* ANIMATIONS */
@@ -732,7 +777,7 @@
       <p class="hero-sub">Cadeiras e móveis corporativos de alto padrão. Entregamos em Goiânia e para todo o Brasil. Pagamento seguro e garantia de fábrica.</p>
       <div class="hero-cta">
         <button class="btn-gold" onclick="scrollTo('produtos')">🛒 Comprar Agora</button>
-        <button class="btn-outline" onclick="scrollTo('categorias')">Ver Categorias</button>
+        <button class="btn-outline" onclick="scrollTo('produtos')">Ver Categorias</button>
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Produtos</div></div>
@@ -776,23 +821,12 @@
 </div>
 
 <!-- CATEGORIES -->
-<section id="categorias">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label">Navegue por</span>
-      <h2 class="section-title">Nossas Categorias</h2>
-      <div class="gold-line"></div>
-    </div>
-    <div class="categories-grid" id="categoriesGrid"></div>
-  </div>
-</section>
-
 <!-- PRODUCTS -->
 <section class="products" id="produtos">
   <div class="container">
     <div class="section-header">
       <span class="section-label">Confira nossa seleção</span>
-      <h2 class="section-title">Produtos em Destaque</h2>
+      <h2 class="section-title">Produtos</h2>
       <div class="gold-line"></div>
     </div>
     <div class="search-bar-wrap">
@@ -11698,27 +11732,32 @@ document.getElementById('detailModal').addEventListener('click', function(e) { i
 // Mobile menu toggle
 document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
   const nav = document.getElementById('navLinks');
-  if (nav.style.display === 'flex') {
-    nav.style.display = 'none';
+  const isOpen = nav.classList.contains('mobile-open');
+  if (isOpen) {
+    nav.classList.remove('mobile-open');
   } else {
-    nav.style.display = 'flex';
-    nav.style.flexDirection = 'column';
-    nav.style.position = 'absolute';
-    nav.style.top = '70px';
-    nav.style.left = '0';
-    nav.style.right = '0';
-    nav.style.background = 'rgba(10,10,10,0.98)';
-    nav.style.padding = '20px 24px';
-    nav.style.gap = '20px';
-    nav.style.borderBottom = '1px solid rgba(201,168,76,0.2)';
-    nav.style.zIndex = '999';
+    nav.classList.add('mobile-open');
   }
 });
 
-// Close mobile menu when clicking a link
-document.querySelectorAll('#navLinks a').forEach(a => {
+// Mobile: tap top-level items to toggle dropdown
+document.querySelectorAll('#navLinks > li').forEach(li => {
+  const topLink = li.querySelector(':scope > a');
+  const dropdown = li.querySelector('.dropdown');
+  if (topLink && dropdown) {
+    topLink.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        li.classList.toggle('open');
+      }
+    });
+  }
+});
+
+// Close mobile menu when clicking a leaf link
+document.querySelectorAll('#navLinks .dropdown a').forEach(a => {
   a.addEventListener('click', () => {
-    document.getElementById('navLinks').style.display = 'none';
+    document.getElementById('navLinks').classList.remove('mobile-open');
   });
 });
 
