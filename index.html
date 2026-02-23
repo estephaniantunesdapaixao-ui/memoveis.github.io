@@ -86,10 +86,39 @@
   }
   .logo-text { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); }
   .logo-text span { color: var(--gold); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { text-decoration: none; color: var(--gray-light); font-size: 14px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.3s; }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links > li { position: relative; }
+  .nav-links > li > a {
+    text-decoration: none; color: #333; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.3px; transition: color 0.2s; padding: 8px 12px;
+    display: flex; align-items: center; gap: 4px; white-space: nowrap;
+    border-radius: 6px;
+  }
+  .nav-links > li > a:hover { color: var(--gold); background: rgba(201,168,76,0.06); }
+  .nav-links > li > a .arrow { font-size: 9px; transition: transform 0.2s; }
+  .nav-links > li:hover > a .arrow { transform: rotate(180deg); }
+
+  /* Dropdown */
+  .dropdown {
+    position: absolute; top: calc(100% + 6px); left: 0;
+    background: #fff; border: 1px solid rgba(201,168,76,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12); border-radius: 10px;
+    min-width: 200px; padding: 8px 0; z-index: 2000;
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: all 0.2s ease; pointer-events: none;
+  }
+  .nav-links > li:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: all; }
+  .dropdown a {
+    display: block; padding: 9px 18px; color: #333; text-decoration: none;
+    font-size: 13px; font-weight: 500; transition: all 0.15s; white-space: nowrap;
+  }
+  .dropdown a:hover { background: rgba(201,168,76,0.08); color: var(--gold); padding-left: 24px; }
+  .dropdown-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 4px 0; }
+  .dropdown-label {
+    padding: 8px 18px 4px; font-size: 10px; font-weight: 700; color: #999;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
   .cart-btn {
     position: relative; background: none; border: 1px solid rgba(201,168,76,0.4);
     color: var(--white); padding: 8px 16px; cursor: pointer; font-family: 'DM Sans', sans-serif;
@@ -562,8 +591,120 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Início</a></li>
-      <li><a href="#categorias">Categorias</a></li>
-      <li><a href="#produtos">Produtos</a></li>
+
+      <li>
+        <a href="#" onclick="filterProducts('executivas');scrollToProducts();return false;">Cadeira Escritório <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('tela');scrollToProducts();return false;">Cadeira de Tela</a>
+          <a href="#" onclick="filterProducts('presidente');scrollToProducts();return false;">Presidente</a>
+          <a href="#" onclick="filterProducts('fixas');scrollToProducts();return false;">Cadeira Fixa – Estofada</a>
+          <a href="#" onclick="filterProducts('tela');scrollToProducts();return false;">– Tela</a>
+          <a href="#" onclick="filterProducts('plasticas');scrollToProducts();return false;">– Plástica ISO</a>
+          <a href="#" onclick="filterProducts('diretor');scrollToProducts();return false;">Diretor</a>
+          <a href="#" onclick="filterProducts('executivas');scrollToProducts();return false;">Executiva</a>
+          <a href="#" onclick="filterProducts('secretaria');scrollToProducts();return false;">Secretária</a>
+          <a href="#" onclick="filterProducts('plasticas');scrollToProducts();return false;">Plástica Giratória ISO</a>
+          <a href="#" onclick="filterProducts('caixa');scrollToProducts();return false;">Cadeira Caixa</a>
+          <a href="#" onclick="filterProducts('gamer');scrollToProducts();return false;">Gamer</a>
+          <a href="#" onclick="filterProducts('banquetas');scrollToProducts();return false;">Banquetas</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Recepção</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Móveis Escritório <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <div class="dropdown-label">Linha Nogal Sevilha / Branco</div>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Móveis Sevilha / Branco</a>
+          <div class="dropdown-label">Linha Nogal Sevilha / Preto</div>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Móveis Sevilha / Preto</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Linha JOB – Cinza</a>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Linha JOB – Preto</a>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Linha JOB – Marsala</a>
+          <div class="dropdown-divider"></div>
+          <a href="#" onclick="filterProducts('moveis_esc');scrollToProducts();return false;">Mesa de Reunião</a>
+          <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofá Escritório</a>
+          <a href="#" onclick="filterProducts('acessorios');scrollToProducts();return false;">Acessórios</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Móveis Aço <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Armário de Aço</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Roupeiro W3</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Roupeiro Pandin</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Arquivo de Aço</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Estante de Aço</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Porta Pallets</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('escolar');scrollToProducts();return false;">Móveis Escolar <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('escolar');scrollToProducts();return false;">Carteira Escolar</a>
+          <a href="#" onclick="filterProducts('escolar');scrollToProducts();return false;">Conjunto Escolar – Infantil</a>
+          <a href="#" onclick="filterProducts('escolar');scrollToProducts();return false;">Conjunto Escolar – Juvenil</a>
+          <a href="#" onclick="filterProducts('escolar');scrollToProducts();return false;">Conjunto Escolar – Adulto</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('gondola');scrollToProducts();return false;">Gôndolas Aço <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('gondola');scrollToProducts();return false;">Gôndola de Parede</a>
+          <a href="#" onclick="filterProducts('gondola');scrollToProducts();return false;">Gôndola de Centro</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofá Escritório <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofá Roma – Nude</a>
+          <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofá Roma – Areia</a>
+          <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofá Roma – Preto</a>
+          <a href="#" onclick="filterProducts('sofa');scrollToProducts();return false;">Sofanete Preto</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Mesa Refeitório <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Fixo – 04 Lugares</a>
+          <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Fixo – 06 Lugares</a>
+          <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Fixo – 08 Lugares</a>
+          <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Fixo – 10 Lugares</a>
+          <a href="#" onclick="filterProducts('refeitorio');scrollToProducts();return false;">Escamoteável</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('auditorio');scrollToProducts();return false;">Auditório</a>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarinas <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Aeroporto</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Sofanete</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Estofada</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Executiva</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Plástica</a>
+          <a href="#" onclick="filterProducts('longarinas');scrollToProducts();return false;">Longarina Secretária</a>
+        </div>
+      </li>
+
+      <li>
+        <a href="#" onclick="filterProducts('acessorios');scrollToProducts();return false;">+ Produtos <span class="arrow">▾</span></a>
+        <div class="dropdown">
+          <a href="#" onclick="filterProducts('acessorios');scrollToProducts();return false;">Acessórios</a>
+          <a href="#" onclick="filterProducts('acessorios');scrollToProducts();return false;">Apoio para Pés</a>
+          <a href="#" onclick="filterProducts('acessorios');scrollToProducts();return false;">Porta CPU</a>
+        </div>
+      </li>
+
       <li><a href="#contato">Contato</a></li>
     </ul>
     <div class="nav-right">
@@ -820,23 +961,25 @@
 // DATA
 // ==============================
 const categories = [
-  { id: 'executivas', name: 'Cadeiras Executivas', img: 'https://moveispollo.com.br/wp-content/uploads/2025/12/15401266973-denver-19.jpg', count: 82 },
-  { id: 'presidente', name: 'Cadeiras Presidente', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/3249.jpg', count: 46 },
-  { id: 'diretor', name: 'Cadeiras Diretor', img: 'https://moveispollo.com.br/wp-content/uploads/2025/07/15360652478-copia-de-diretor.jpg', count: 25 },
-  { id: 'secretaria', name: 'Cadeiras Secretária', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/base-3.jpg', count: 4 },
-  { id: 'gamer', name: 'Cadeiras Gamer', img: 'https://moveispollo.com.br/wp-content/uploads/2025/10/15386226342-w80-24.jpg', count: 3 },
-  { id: 'tela', name: 'Cadeiras de Tela/Mesh', img: 'https://moveispollo.com.br/wp-content/uploads/2024/02/esteirinha-pastel.jpg', count: 24 },
-  { id: 'fixas', name: 'Cadeiras Fixas', img: 'https://moveispollo.com.br/wp-content/uploads/2025/04/15337584661-esteirinha-fix.jpg', count: 15 },
-  { id: 'caixa', name: 'Cadeiras de Caixa/Balcão', img: 'https://moveispollo.com.br/wp-content/uploads/2021/11/15097175300_SGAV-2.jpg', count: 22 },
-  { id: 'longarinas', name: 'Longarinas', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/8207574361_principal-300x300.jpg.webp', count: 102 },
-  { id: 'longarina_esp', name: 'Longarinas Especiais', img: 'https://moveispollo.com.br/wp-content/uploads/2022/03/15114679318_HOWILIKETHAT.jpg', count: 5 },
-  { id: 'moveis_esc', name: 'Móveis de Escritório', img: 'https://moveispollo.com.br/wp-content/uploads/2025/08/15368208726-mesa-escritorio-170-1.jpg', count: 256 },
-  { id: 'armarios', name: 'Armários de Aço', img: 'https://moveispollo.com.br/wp-content/uploads/2025/12/15399657109-roupeiro.jpg', count: 111 },
-  { id: 'escolar', name: 'Móveis Escolares', img: 'https://moveispollo.com.br/wp-content/uploads/2025/09/15378118596-universitaria-.jpg', count: 108 },
-  { id: 'sofa', name: 'Sofás de Escritório', img: 'https://moveispollo.com.br/wp-content/uploads/2024/10/15304255257-preto.jpg', count: 13 },
-  { id: 'refeitorio', name: 'Mesas de Refeitório', img: 'https://moveispollo.com.br/wp-content/uploads/2024/02/15253960508_preto.jpg', count: 34 },
-  { id: 'banquetas', name: 'Banquetas', img: 'https://moveispollo.com.br/wp-content/uploads/2022/11/15159970727-amar.jpg', count: 12 },
-  { id: 'acessorios', name: 'Acessórios p/ Cadeiras', img: 'https://moveispollo.com.br/wp-content/uploads/2025/01/15319525233-a-e-plastico-c.jpg', count: 25 },
+  { id: 'executivas', name: 'Cadeiras Executivas', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/executiva.jpg', count: 0 },
+  { id: 'presidente', name: 'Cadeiras Presidente', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/3249.jpg', count: 0 },
+  { id: 'diretor', name: 'Cadeiras Diretor', img: 'https://moveispollo.com.br/wp-content/uploads/2025/07/15360652478-copia-de-diretor.jpg', count: 0 },
+  { id: 'tela', name: 'Cadeiras de Tela/Mesh', img: 'https://moveispollo.com.br/wp-content/uploads/2024/02/esteirinha-pastel.jpg', count: 0 },
+  { id: 'secretaria', name: 'Cadeiras Secretária', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/base-3.jpg', count: 0 },
+  { id: 'gamer', name: 'Cadeiras Gamer', img: 'https://moveispollo.com.br/wp-content/uploads/2025/10/15386226342-w80-24.jpg', count: 0 },
+  { id: 'fixas', name: 'Cadeiras Fixas / Interlocutor', img: 'https://moveispollo.com.br/wp-content/uploads/2025/04/15337584661-esteirinha-fix.jpg', count: 0 },
+  { id: 'plasticas', name: 'Cadeiras Plásticas', img: 'https://moveispollo.com.br/wp-content/uploads/2023/07/15201095060-iso-plastica-preta.jpg', count: 0 },
+  { id: 'caixa', name: 'Cadeiras de Caixa/Balcão', img: 'https://moveispollo.com.br/wp-content/uploads/2021/11/15097175300_SGAV-2.jpg', count: 0 },
+  { id: 'banquetas', name: 'Banquetas', img: 'https://moveispollo.com.br/wp-content/uploads/2022/11/15159970727-amar.jpg', count: 0 },
+  { id: 'moveis_esc', name: 'Móveis de Escritório', img: 'https://moveispollo.com.br/wp-content/uploads/2025/08/15368208726-mesa-escritorio-170-1.jpg', count: 0 },
+  { id: 'sofa', name: 'Sofás de Escritório', img: 'https://moveispollo.com.br/wp-content/uploads/2024/10/15304255257-preto.jpg', count: 0 },
+  { id: 'armarios', name: 'Armários de Aço', img: 'https://moveispollo.com.br/wp-content/uploads/2025/12/15399657109-roupeiro.jpg', count: 0 },
+  { id: 'escolar', name: 'Móveis Escolares', img: 'https://moveispollo.com.br/wp-content/uploads/2025/09/15378118596-universitaria-.jpg', count: 0 },
+  { id: 'gondola', name: 'Gôndolas de Aço', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/gondola.jpg', count: 0 },
+  { id: 'refeitorio', name: 'Mesas de Refeitório', img: 'https://moveispollo.com.br/wp-content/uploads/2024/02/15253960508_preto.jpg', count: 0 },
+  { id: 'auditorio', name: 'Auditório', img: 'https://moveispollo.com.br/wp-content/uploads/2022/03/15114679318_HOWILIKETHAT.jpg', count: 0 },
+  { id: 'longarinas', name: 'Longarinas', img: 'https://moveispollo.com.br/wp-content/uploads/2021/03/8207574361_principal-300x300.jpg.webp', count: 0 },
+  { id: 'acessorios', name: 'Acessórios p/ Cadeiras', img: 'https://moveispollo.com.br/wp-content/uploads/2025/01/15319525233-a-e-plastico-c.jpg', count: 0 },
 ];
 
 let products = [
@@ -1818,7 +1961,7 @@ let products = [
   {
     "id": 63083,
     "name": "Balcão de Atendimento 1.35×1,13×0,60m – S/ Gavetas MARSALA/PRETO – 63083",
-    "category": "caixa",
+    "category": "moveis_esc",
     "icon": "📦",
     "price": 831.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/11/15097175300_SGAV-2.jpg",
@@ -1833,7 +1976,7 @@ let products = [
   {
     "id": 63084,
     "name": "Balcão de Atendimento 1.35×1,13×0,60m – C/ Gavetas MARSALA/PRETO – 63084",
-    "category": "caixa",
+    "category": "moveis_esc",
     "icon": "📦",
     "price": 1023.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/11/15097445071_gav.jpg",
@@ -3550,7 +3693,7 @@ let products = [
     "name": "Poltrona para Escritório Interlocutor ATREUS Estofada – Cor Preto – Pollo Móveis – 32882",
     "price": 446.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/12/15240162957_interlocutor.jpg",
-    "category": "sofa",
+    "category": "fixas",
     "url": "https://moveispollo.com.br/poltrona-para-escritorio-interlocutor-atreus-estofada-cor-preto-pmd-32882/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -3920,7 +4063,7 @@ let products = [
     "name": "Poltrona Auditório Rebatível  01 Lugar – Linha Premium – Corino Preto – 38101",
     "price": 793.05,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/11/15389256147-auditorio-5.jpg",
-    "category": "longarina_esp",
+    "category": "auditorio",
     "url": "https://moveispollo.com.br/poltrona-auditorio-rebativel-01-lugar-linha-premium-corino-preto-38001/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -3930,7 +4073,7 @@ let products = [
     "name": "Poltrona Auditório Rebatível  02 Lugares – Linha Premium – Corino Preto – 38102",
     "price": 1362.67,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/10/auditorio-40.jpg",
-    "category": "longarina_esp",
+    "category": "auditorio",
     "url": "https://moveispollo.com.br/poltrona-auditorio-rebativel-02-lugares-linha-premium-corino-preto-38102/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -3940,7 +4083,7 @@ let products = [
     "name": "Poltrona Auditório Rebatível  03 Lugares – Linha Premium – Corino Preto – 38103",
     "price": 1932.3,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/10/auditorio-37.jpg",
-    "category": "longarina_esp",
+    "category": "auditorio",
     "url": "https://moveispollo.com.br/poltrona-auditorio-rebativel-03-lugares-linha-premium-corino-preto-38103/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -3950,7 +4093,7 @@ let products = [
     "name": "Poltrona Auditório Rebatível  04 Lugares – Linha Premium – Corino Preto – 38104",
     "price": 2501.92,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/10/auditorio-39.jpg",
-    "category": "longarina_esp",
+    "category": "auditorio",
     "url": "https://moveispollo.com.br/poltrona-auditorio-rebativel-04-lugares-linha-premium-corino-preto-38104/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -3960,7 +4103,7 @@ let products = [
     "name": "Poltrona Auditório Rebatível  05 Lugares – Linha Premium – Corino Preto – 38105",
     "price": 3071.55,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/10/auditorio-38.jpg",
-    "category": "longarina_esp",
+    "category": "auditorio",
     "url": "https://moveispollo.com.br/poltrona-auditorio-rebativel-05-lugares-linha-premium-corino-preto-38105/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5690,7 +5833,7 @@ let products = [
     "name": "Balcão de Atendimento 0,90×0,60m – S/ Gavetas Cor Branco – 63095",
     "price": 449.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/07/15136587606-01.jpg",
-    "category": "caixa",
+    "category": "moveis_esc",
     "url": "https://moveispollo.com.br/balcao-de-atendimento-090x060m-s-gavetas-new-city-cor-branco-63095/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5700,7 +5843,7 @@ let products = [
     "name": "Balcão de Atendimento 1,20×0,60m- s/ Gavetas Cor Branco – 63093",
     "price": 528.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/07/15136453979-balcao20de20atendimento-2.jpg",
-    "category": "caixa",
+    "category": "moveis_esc",
     "url": "https://moveispollo.com.br/balcao-de-atendimento-120x060m-s-gavetas-new-city-cor-branco-63093/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5710,7 +5853,7 @@ let products = [
     "name": "Balcão de Atendimento 1,20×0,60m- c/ Gavetas Cor Branco – 63094",
     "price": 668.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/07/15136481754-balcao-1.jpg",
-    "category": "caixa",
+    "category": "moveis_esc",
     "url": "https://moveispollo.com.br/balcao-de-atendimento-120x060m-c-gavetas-new-city-cor-branco-63094/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5800,7 +5943,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Preto – MRPLAST – 31230",
     "price": 109.38,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487020_5.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-preto-mrplast-pmd-31230/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5810,7 +5953,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Laranja – MRPLAST – 31235",
     "price": 117.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487318_4.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-laranja-mrplast-pmd-31235/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5820,7 +5963,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Amarelo – MRPLAST – 31233",
     "price": 117.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487223_1.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-amarelo-mrplast-pmd-31233/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5830,7 +5973,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Azul – MRPLAST – 31232",
     "price": 233.63,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487168_2.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-azul-mrplast-pmd-31232/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5840,7 +5983,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Verde – MRPLAST – 31231",
     "price": 119.88,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487119_6.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-verde-mrplast-pmd-31231/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5850,7 +5993,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Branco – MRPLAST – 31236",
     "price": 238,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487389_3.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-branco-mrplast-pmd-31236/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5860,7 +6003,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Vermelho – MRPLAST – 31234",
     "price": 120.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15253487259_7.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-vermelho-mrplast-pmd-31234/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5870,7 +6013,7 @@ let products = [
     "name": "Cadeira Fixa 04 Pés Plástica (Polipropileno) – Cor Cinza – MRPLAST – 31336",
     "price": 120.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/09/cinza-1.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-04-pes-plastica-polipropileno-cor-cinza-mrplast-pmd-31336/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5880,7 +6023,7 @@ let products = [
     "name": "Cadeira Fixa Plástica  04 pés Cor Preto (Polipropileno) – MOGIMAX – 31206",
     "price": 104.13,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/03/preot-31.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-plastica-04-pes-cor-preto-polipropileno-pollo-moveis-31206/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5890,7 +6033,7 @@ let products = [
     "name": "Cadeira Fixa Plástica 04 pés Cor Azul (Polipropileno) – MOGIMAX – 31207",
     "price": 115.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/03/auzl-121-1.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-plastica-04-pes-cor-azul-polipropileno-pollo-moveis-31207/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5900,7 +6043,7 @@ let products = [
     "name": "Cadeira Fixa Plástica 04 pés Cor Vermelho (Polipropileno) – MOGIMAX – 31208",
     "price": 115.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/03/vermelho021.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-plastica-04-pes-cor-vermelho-polipropileno-pollo-moveis-31208/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5910,7 +6053,7 @@ let products = [
     "name": "Cadeira Fixa Plástica 04 pés Cor Verde (Polipropileno) – MOGIMAX – 31210",
     "price": 115.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/03/15179649840_lado-1.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-plastica-04-pes-cor-verde-polipropileno-pollo-moveis-31210/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5920,7 +6063,7 @@ let products = [
     "name": "Cadeira Fixa Plástica 04 pés Cor Amarelo (Polipropileno) – MOGIMAX – 31209",
     "price": 115.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/03/amarelo-201.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-fixa-plastica-04-pes-cor-amarelo-polipropileno-pollo-moveis-31209/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5930,7 +6073,7 @@ let products = [
     "name": "Cadeira Plástica REALPLAST 04 pés-Plástico Preto (Polipropileno) – 31201",
     "price": 105.88,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/07/15361434155-copia-de-copia-de-copia-de-copia-de-copia-de-copia-de-copia-de-copia-de-copia-de-copia.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-realplast-04-pes-plastico-preto-polipropileno-31201/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5940,7 +6083,7 @@ let products = [
     "name": "Cadeira Plástica 04 Pés – VERMELHO (Polipropileno) -REALPLAST – 31202",
     "price": 124.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/09/15150711370_Vermelho.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-realplast-04-pes-vermelho-polipropileno-31202/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5950,7 +6093,7 @@ let products = [
     "name": "Cadeira Plástica 04 Pés – VERDE (Polipropileno) – REALPLAST – 31203",
     "price": 124.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/09/15150716785_VERDE-13.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-realplast-04-pes-verde-polipropileno-31203/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5960,7 +6103,7 @@ let products = [
     "name": "Cadeira Plástica 04 Pés – AMARELO – (Polipropileno) – REALPLAST – 31204",
     "price": 124.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/09/amarelo.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-realplast-04-pes-amarelo-polipropileno-31204/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5970,7 +6113,7 @@ let products = [
     "name": "Cadeira Plástica 04 pés – Plástico Vermelho – REALPLAST – 31283",
     "price": 121.28,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/12/15114898189-cadeira-vermelha.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-04-pes-plastico-vermelho-realplast-31283/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5980,7 +6123,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR PRETO – 31312",
     "price": 416.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261509030_preto-1.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-preto-31312/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -5990,7 +6133,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR VERDE – 31318",
     "price": 289.63,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261538196_VERDE.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-verde-31318/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6000,7 +6143,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR LARANJA – 31316",
     "price": 297.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261549192_LARANJA.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-laranja-31316/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6010,7 +6153,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR AMARELO – 31314",
     "price": 297.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261542215_amarleo.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-amarelo-31314/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6020,7 +6163,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR BRANCO – 31315",
     "price": 301,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261546230_BRANCO.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-branco-31315/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6030,7 +6173,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR AZUL – 31317",
     "price": 304.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261512305_azul.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-azul-31317/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6040,7 +6183,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – MRPLAST – COR VERMELHO – 31313",
     "price": 301,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/04/15261533116_vermelho.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-mrplast-cor-vermelho-31313/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6050,7 +6193,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – REALPLAST COR PRETO – 31300",
     "price": 286.13,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15218354065_preto.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-realplast-cor-preto-31300/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6060,7 +6203,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – REALPLAST – COR AZUL – 31302",
     "price": 590.63,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15218734589_azul.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-realplast-cor-azul-31302/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6070,7 +6213,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – REALPLAST – COR VERMELHO – 31303",
     "price": 304.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15218354230_vermelhao.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-realplast-cor-vermelho-31303/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6090,7 +6233,7 @@ let products = [
     "name": "Cadeira de Escritório Giratória PLÁSTICA – REALPLAST – COR VERDE – 31301",
     "price": 609,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/03/15218734434_verde.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-giratoria-plastica-realplast-cor-verde-31301/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6120,7 +6263,7 @@ let products = [
     "name": "Cadeira Interlocutor TELA EROS  – Cor Preto – Pollo Móveis – 30047",
     "price": 420,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/02/esteirinha-pastel.jpg",
-    "category": "tela",
+    "category": "fixas",
     "url": "https://moveispollo.com.br/cadeira-interlocutor-tela-eros-cor-preto-pmd-30047/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6130,7 +6273,7 @@ let products = [
     "name": "Cadeira Interlocutor Tela DUBAI (Fixa) base Cromada – Cor Preto – Pollo Móveis – 31018",
     "price": 437.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/03/31018.jpg",
-    "category": "tela",
+    "category": "fixas",
     "url": "https://moveispollo.com.br/cadeira-interlocutor-tela-or-3312-fixa-cromada-cor-preta-31018/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6140,7 +6283,7 @@ let products = [
     "name": "Cadeira de Escritório Interlocutor Tela JOY – Cor Preto – 34008",
     "price": 435.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/10/15387354141-refeitorio-53.jpg",
-    "category": "tela",
+    "category": "fixas",
     "url": "https://moveispollo.com.br/cadeira-de-escritorio-interlocutor-tela-joy-cor-preto-34008/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6150,7 +6293,7 @@ let products = [
     "name": "Cadeira INTERLOCUTOR TELA Charles Eames Esteirinha – COR PRETO – Pollo Móveis – 32876",
     "price": 635.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2024/02/5.jpg",
-    "category": "tela",
+    "category": "fixas",
     "url": "https://moveispollo.com.br/cadeira-interlocutor-tela-charles-eames-esteirinha-cor-preto-pollo-moveis-32876/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -6890,7 +7033,7 @@ let products = [
     "name": "Balcão de Atendimento 1.35×1,13×0,60m – C/ 02 Gavetas  NOGAL SEVILHA / PRETO – 63082",
     "price": 1065.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/03/Desenho-sem-titulo-46.jpg",
-    "category": "caixa",
+    "category": "moveis_esc",
     "url": "https://moveispollo.com.br/balcao-de-atendimento-1-35x113x060m-c-02-gavetas-gebb-work-nogal-sevilha-preto-63082/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -7040,7 +7183,7 @@ let products = [
     "name": "Balcão de Atendimento 1.35×1,13×0,60m – S/ Gavetas NOGAL SEVILHA / PRETO – 63081",
     "price": 866.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/03/Desenho-sem-titulo-45.jpg",
-    "category": "caixa",
+    "category": "moveis_esc",
     "url": "https://moveispollo.com.br/balcao-de-atendimento-1-35x113x060m-s-gavetas-workstart-nogal-sevilha-preto-63081/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8320,7 +8463,7 @@ let products = [
     "name": "Gôndola Fácil INICIAL de Parede 1,62×0,90m 15005",
     "price": 857.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-inicial-de-parede-162x090m-w3-15005.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-inicial-de-parede-162x090m-w3-15005/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8330,7 +8473,7 @@ let products = [
     "name": "Gôndola Fácil CONTINUAÇÃO de Parede 1,62×0,90m – 15006",
     "price": 717.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-continuacao-de-parede-162x090m-w3-15006.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-continuacao-de-parede-162x090m-w3-15006/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8340,7 +8483,7 @@ let products = [
     "name": "Gôndola Fácil INICIAL de Parede 2,02×0,90m – 15007",
     "price": 1029,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-inicial-de-parede-202x090m-w3-15007.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-inicial-de-parede-202x090m-w3-15007/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8350,7 +8493,7 @@ let products = [
     "name": "Gôndola Fácil CONTINUAÇÃO de Parede 2,02×0,90m 15008",
     "price": 869.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-continuacao-de-parede-202x090m-w3-15008.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-continuacao-de-parede-202x090m-w3-15008/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8360,7 +8503,7 @@ let products = [
     "name": "Gôndola Fácil INICIAL de Centro 1,24×0,90m – W3 – 15003",
     "price": 1081.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-inicial-de-centro-124x090m-w3-15003.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-inicial-de-centro-124x090m-w3-15003/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8370,7 +8513,7 @@ let products = [
     "name": "Gôndola Fácil CONTINUAÇÃO de Centro 1,24×0,90m – W3 – 15004",
     "price": 924,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-continuacao-de-centro-124x090m-w3-15004.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-continuacao-de-centro-124x090m-w3-15004/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8380,7 +8523,7 @@ let products = [
     "name": "Ponta de Gôndola 1,24×0,90m – W3 – 15010",
     "price": 633.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/ponta-de-gondola-124x090m-w3-15010.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/ponta-de-gondola-124x090m-w3-15010/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8390,7 +8533,7 @@ let products = [
     "name": "Gôndola Fácil INICIAL de Centro 1,62×0,90m 15001",
     "price": 1347.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-inicial-de-centro-162x090m-w3-15001.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-inicial-de-centro-162x090m-w3-15001/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8400,7 +8543,7 @@ let products = [
     "name": "Gôndola Fácil CONTINUAÇÃO de Centro 1,62×0,90m 15002",
     "price": 962.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/08/gondola-facil-continuacao-de-centro-162x090m-w3-15002.png",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-facil-continuacao-de-centro-162x090m-w3-15002/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8410,7 +8553,7 @@ let products = [
     "name": "Ponta de Gôndola 1,62×0,90m – W3 – 15009",
     "price": 799.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/07/15142485851-12819.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/ponta-de-gondola-162x090m-w3-15009/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8420,7 +8563,7 @@ let products = [
     "name": "Gôndola de Canto Parede 1,62×0,40m 15026",
     "price": 303.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/12/15142478237_ponta-1.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-de-canto-parede-162x040m-w3-15026/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8430,7 +8573,7 @@ let products = [
     "name": "Gôndola de Canto Parede 2,02×0,40m 15025",
     "price": 379.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/12/15142482157_061-1.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/gondola-de-canto-parede-202x040m-w3-15025/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8820,7 +8963,7 @@ let products = [
     "name": "Cesto p/ Compras Metálico 14301",
     "price": 72.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/04/2747569498_1059-300x300.jpg.webp",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/cesto-p-compras-metalico-amapa-14301/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8830,7 +8973,7 @@ let products = [
     "name": "Cesto p/ Compras Plástico Amarelo 14310",
     "price": 72.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/04/6866987291_images204.jpg.webp",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/cesto-p-compras-plastico-amarelo-amapa-14310/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8840,7 +8983,7 @@ let products = [
     "name": "Cesto p/ Compras Plástico Preto 14313",
     "price": 72.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/04/6867015008_images203.jpg.webp",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/cesto-p-compras-plastico-preto-amapa-14313/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8850,7 +8993,7 @@ let products = [
     "name": "Estante Biblioteca de PAREDE com 05 Bandejas – 2,00×0,92×0,32m – 13124",
     "price": 862.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/12/15402029768-estante-biblioteca-3.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/estante-biblioteca-de-parede-com-05-bandejas-200x092x032m-sa-13124/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8860,7 +9003,7 @@ let products = [
     "name": "Estante Biblioteca de CENTRO com 10 Bandejas – 2,00×0,92×0,58m – 13123",
     "price": 1044.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2025/12/15402035349-estante-biblioteca-12.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/estante-biblioteca-de-centro-com-10-bandejas-200x092x058m-sa-13123/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8870,7 +9013,7 @@ let products = [
     "name": "Cesto p/ Compras Plástico Azul 14311",
     "price": 72.6,
     "img": "https://moveispollo.com.br/wp-content/uploads/2021/04/14311.webp",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/cesto-p-compras-plastico-azul-amapa-14311/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8880,7 +9023,7 @@ let products = [
     "name": "Porta Pallet INICIAL com 03 Bandejas – 2,00×1,80×0,80cm – Pollo Móveis – 11091",
     "price": 2051,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/05/15180367354_Inicial.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/porta-pallet-inicial-com-03-bandejas-200x180x080cm-w3-11091/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8890,7 +9033,7 @@ let products = [
     "name": "Porta Pallet com 03 Bandejas Complemento – 2,00×1,80×0,80 – Pollo Móveis – 11092",
     "price": 1650.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/05/15180366653_1.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/porta-pallet-com-03-bandejas-complemento-200x180x080-w3-11092/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8900,7 +9043,7 @@ let products = [
     "name": "Prateleira Porta Pallet com 04 Bandejas – 3,00×1,80×0,80m – Pollo Móveis – 11089",
     "price": 3027.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/05/15180372821_porta-1.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/prateleira-porta-pallet-com-04-bandejas-300x180x080m-w3-11089/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -8910,7 +9053,7 @@ let products = [
     "name": "Porta Pallet Complemento com 04 Bandejas 3,00×1,80×0,80cm – Pollo Móveis – 11090",
     "price": 2346.75,
     "img": "https://moveispollo.com.br/wp-content/uploads/2023/05/15180372611_67a1a6f74972ac9ccd7a7bd9d3803124.jpg",
-    "category": "armarios",
+    "category": "gondola",
     "url": "https://moveispollo.com.br/porta-pallet-complemento-com-04-bandejas-300x180x080cm-w3-11090/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -9380,7 +9523,7 @@ let products = [
     "name": "Cadeira Plástica REALPLAST 04 Pés – AZUL – (Polipropileno) – 31205",
     "price": 124.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/09/cadeira-plastica-realplast-04-pes-azul-polipropileno-31205.jpg",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/cadeira-plastica-realplast-04-pes-azul-polipropileno-31205/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -9530,7 +9673,7 @@ let products = [
     "name": "Kit 05 Cadeiras Plásticas 04 pés – COR PRETO – REALPLAST- 24000",
     "price": 529.38,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/03/kit-05-cadeiras-plasticas-04-pes-cor-preto-24000-1.png",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/kit-05-cadeiras-plasticas-04-pes-cor-preto-24000/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -9540,7 +9683,7 @@ let products = [
     "name": "Kit 05 Cadeiras Plásticas 04 pés – COR AZUL – REALPLAST – 24002",
     "price": 621.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/03/kit-05-cadeiras-plasticas-04-pes-cor-azul-24002.png",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/kit-05-cadeiras-plasticas-04-pes-cor-azul-24002/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -9550,7 +9693,7 @@ let products = [
     "name": "Kit 10 Cadeiras Plásticas 04 pés – COR PRETO – REALPLAST – 24001",
     "price": 1102.5,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/03/kit-10-cadeiras-plasticas-04-pes-cor-preto-24001.png",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/kit-10-cadeiras-plasticas-04-pes-cor-preto-24001/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -9560,7 +9703,7 @@ let products = [
     "name": "Kit 10 Cadeiras Plásticas 04 pés – COR AZUL – REALPLAST – 24003",
     "price": 1286.25,
     "img": "https://moveispollo.com.br/wp-content/uploads/2022/03/kit-10-cadeiras-plasticas-04-pes-cor-azul-24003.png",
-    "category": "fixas",
+    "category": "plasticas",
     "url": "https://moveispollo.com.br/kit-10-cadeiras-plasticas-04-pes-cor-azul-24003/",
     "desc": "Produto importado automaticamente da Móveis Pollo.",
     "stock": 10
@@ -11541,6 +11684,11 @@ function closeInfoModal() {
 // ==============================
 function scrollTo(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+function scrollToProducts() {
+  setTimeout(() => {
+    document.getElementById('produtos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
 }
 
 // Close modals on overlay click
