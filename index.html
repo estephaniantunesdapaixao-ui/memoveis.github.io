@@ -675,14 +675,10 @@
       </li>
 
       <li>
-        <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Móveis Aço <span class="arrow">▾</span></a>
+        <a href="#" onclick="filterProducts('moveis_aco');scrollToProducts();return false;">Móveis Aço <span class="arrow">▾</span></a>
         <div class="dropdown">
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Armário de Aço</a>
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Roupeiro W3</a>
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Roupeiro Pandin</a>
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Arquivo de Aço</a>
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Estante de Aço</a>
-          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Porta Pallets</a>
+          <a href="#" onclick="filterProducts('armarios');scrollToProducts();return false;">Armários e Roupeiros</a>
+          <a href="#" onclick="filterProducts('gondola');scrollToProducts();return false;">Gôndolas / Estantes</a>
         </div>
       </li>
 
@@ -10721,33 +10717,10 @@ const catBigIcons = {
 };
 
 function renderCategories() {
-  // Compute real counts from products array dynamically
+  // Category grid removed - products shown directly
   const realCounts = {};
   products.forEach(p => { realCounts[p.category] = (realCounts[p.category] || 0) + 1; });
   categories.forEach(c => { c.count = realCounts[c.id] || 0; });
-
-  const grid = document.getElementById('categoriesGrid');
-  const catColors = {
-    executivas: '#0f3460', presidente: '#7a5200', diretor: '#2d0a5e',
-    secretaria: '#0a3030', gamer: '#1a0040', tela: '#0a2a0a',
-    fixas: '#3a0a0a', caixa: '#0a0a3a', longarinas: '#3a2800',
-    longarina_esp: '#002040', moveis_esc: '#1a1500', armarios: '#141414',
-    escolar: '#002200', sofa: '#2e0018', refeitorio: '#1a0e00',
-    banquetas: '#001830', acessorios: '#1a1a00'
-  };
-  grid.innerHTML = categories.map((c, i) => `
-    <div class="category-card" onclick="filterProducts('${c.id}')" style="animation-delay:${i*0.04}s">
-      <div class="cat-bg" style="background:${catColors[c.id]||'#1a1a1a'}">
-        ${c.img ? `<img src="${c.img}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;opacity:0.7;display:block;" onerror="this.style.display='none'">` : ''}
-        <div class="cat-line"></div>
-      </div>
-      <div class="cat-overlay">
-        <div class="cat-name">${c.name}</div>
-        <div class="cat-count">${c.count} produtos</div>
-      </div>
-      <div class="cat-arrow">→</div>
-    </div>
-  `).join('');
 }
 
 function renderFilterBar() {
@@ -10774,6 +10747,11 @@ function filterProducts(cat) {
   }
 }
 
+// Combined category map
+const combinedCats = {
+  'moveis_aco': ['armarios', 'gondola'],
+};
+
 function applyFilters() {
   window._prodPage = 1;
   renderProducts();
@@ -10785,9 +10763,16 @@ function renderProducts() {
   const priceMin = parseFloat(document.getElementById('priceMin')?.value) || 0;
   const priceMax = parseFloat(document.getElementById('priceMax')?.value) || Infinity;
 
-  let filtered = currentFilter === 'todos' 
-    ? [...products].sort((a,b) => a.category.localeCompare(b.category))
-    : products.filter(p => p.category === currentFilter);
+  let filtered;
+  if (currentFilter === 'todos') {
+    filtered = [...products].sort((a,b) => a.category.localeCompare(b.category));
+  } else if (combinedCats[currentFilter]) {
+    const cats = combinedCats[currentFilter];
+    filtered = products.filter(p => cats.includes(p.category));
+    filtered.sort((a,b) => a.category.localeCompare(b.category) || a.price - b.price);
+  } else {
+    filtered = products.filter(p => p.category === currentFilter);
+  }
   // Sort within category by price ascending
   if (currentFilter !== 'todos') filtered.sort((a,b) => a.price - b.price);
   if (searchVal) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchVal) || (p.desc||'').toLowerCase().includes(searchVal));
